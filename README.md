@@ -4,17 +4,13 @@ A keyboard layout for writing French, Spanish and the other languages written in
 
 Without AltGr, HabemUS **is** US QWERTY: same letters, same symbols, same Ctrl shortcuts. Everything else sits on **AltGr** (the right Alt key), and the accented letters are placed **around the letter they belong to**, so you can find them without memorizing a chart.
 
+![HabemUS keyboard: every key with its normal, Shift, AltGr and Shift+AltGr characters](docs/keyboard.svg)
+
 ## The idea: accents around the letter
 
-Each vowel gets a 2×2 block of keys on the AltGr layer:
+Each vowel gets a 2×2 block of keys on the AltGr layer (one colour per vowel):
 
-```
-AltGr +   Q  W   E  R   T  Y   U  I   O  P
-          á  â   é  ê   û  î   ú  í   ó  ô
-          A  S   D  F   G  H   J  K   L  ;
-          à  ä   è  ë   ü  ï   ù  ì   ò  ö
-          └a─┘   └e─┘   └i/u─────┘    └o─┘
-```
+![The AltGr layer's accented vowels, grouped in coloured blocks around their letter](docs/vowels.svg)
 
 Three rules cover all of them:
 
@@ -28,7 +24,12 @@ For French and Spanish, every accented letter you use daily is a single key pres
 
 ## Full AltGr layer
 
-Each key shows `AltGr` / `Shift+AltGr`. Dead keys are in **bold**: press one, then a letter (see [Dead keys](#dead-keys)).
+The keyboard picture at the top shows everything. The same layer as a searchable table:
+
+<details>
+<summary>AltGr layer as a table</summary>
+
+Dead keys are in **bold**: press one, then a letter (see [Dead keys](#dead-keys)).
 
 | Key | AltGr | Shift+AltGr | | Key | AltGr | Shift+AltGr |
 |---|---|---|---|---|---|---|
@@ -58,6 +59,8 @@ Each key shows `AltGr` / `Shift+AltGr`. Dead keys are in **bold**: press one, th
 | `[` | « | ‹ | | | | |
 | `]` | » | › | | | | |
 
+</details>
+
 The two no-break spaces on AltGr+Space are for French spacing: `« texte »`, `Quoi ?`.
 
 ## Dead keys
@@ -78,7 +81,14 @@ Press the dead key, release it, then type a letter. Pressing it twice, or follow
 
 All of them also work with capital letters (Š, Å, Ő…).
 
+In the pictures below, the dead key is outlined in red, each key shows what it gives after the dead key (Shift on top), and greyed keys give nothing.
+
 ### Symbols (AltGr+\ then…)
+
+![Symbols dead key: what each key gives after AltGr+\](docs/dead-symbols.svg)
+
+<details>
+<summary>Symbols as a table</summary>
 
 | Key | Gives | | Key | Gives | | Key | Gives |
 |---|---|---|---|---|---|---|---|
@@ -91,11 +101,18 @@ All of them also work with capital letters (Š, Å, Ő…).
 | `v` `x` | ✓ ✗ | | `%` | ‰ | | `1` | № |
 | `h` `j` `k` `l` | ← ↓ ↑ → | | `H` `J` `K` `L` | ⇐ ⇓ ⇑ ⇒ | | `2` `3` `4` `5` `6` | ½ ⅓ ¼ ⅔ ¾ |
 
+</details>
+
 The arrows follow the Vim direction keys: h left, j down, k up, l right.
 
 ### Greek (Shift+AltGr+- then…)
 
 Letters follow the Linux (X11) Greek dead key, plus final sigma on `c`:
+
+![Greek dead key: what each key gives after Shift+AltGr+-](docs/dead-greek.svg)
+
+<details>
+<summary>Greek letters as a table</summary>
 
 | a | b | c | d | e | f | g | h | i | j | k | l | m |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -105,7 +122,39 @@ Letters follow the Linux (X11) Greek dead key, plus final sigma on `c`:
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | ν | ο | π | χ | ρ | σ | τ | υ | ω | ξ | ψ | ζ |
 
+</details>
+
 Shift gives the capitals (Shift+C gives Σ). The same dead key also makes **superscripts** from the digits and `- = + [ ]` (x² → `2`, ⁻ → `-`), and **subscripts** from the shifted digits (H₂O → `@`). Space gives μ, and pressing the dead key twice gives Ω.
+
+### Accent dead keys
+
+<details>
+<summary>Circumflex, acute, diaeresis, grave, tilde, caron and ring</summary>
+
+**^ circumflex** (Shift+AltGr+6)
+![Circumflex dead key](docs/dead-circumflex.svg)
+
+**´ acute** (AltGr+')
+![Acute dead key](docs/dead-acute.svg)
+
+**¨ diaeresis** (Shift+AltGr+')
+![Diaeresis dead key](docs/dead-diaeresis.svg)
+
+**` grave** (AltGr+`)
+![Grave dead key](docs/dead-grave.svg)
+
+**~ tilde** (Shift+AltGr+`)
+![Tilde dead key](docs/dead-tilde.svg)
+
+**ˇ caron** (AltGr+6)
+![Caron dead key](docs/dead-caron.svg)
+
+**˚ ring / dot above** (AltGr+7)
+![Ring and dot above dead key](docs/dead-ring.svg)
+
+These pictures only show keys typed without AltGr. The combinations that start from an AltGr letter (´ then ö → ő, ` then ä → ą…) are listed in the table above.
+
+</details>
 
 ## Installing
 
@@ -129,11 +178,14 @@ Press both Alt keys together to pause or resume it. If a program shows the wrong
 
 ### Changing the layout
 
-Edit `HabemUS.klc`, either in Keyboard Layout Creator or as text (it is UTF-16), then regenerate the PKL version:
+Edit `HabemUS.klc`, either in Keyboard Layout Creator or as text (it is UTF-16), then regenerate the PKL version and the pictures:
 
 ```
 python tools/klc2pkl.py
+python tools/klc2svg.py
 ```
+
+The pictures in [`docs/`](docs/) are SVG files drawn from the `.klc`, in the style of [keyboard-layout-editor.com](http://www.keyboard-layout-editor.com/).
 
 ## Credits
 
