@@ -172,7 +172,9 @@ The repository holds the source, [`HabemUS.klc`](HabemUS.klc), not a prebuilt in
 
 1. Download PKL (**Code → Download ZIP**) and copy `pkl.exe`, `nonASCII.ini` and the `languages\` folder into a new folder.
 2. Copy the contents of this repository's [`pkl/`](pkl/) folder into the same folder (`pkl.ini` and `layouts\habemus\`).
-3. Set Windows to the plain **English (United States)** layout and run `pkl.exe`.
+3. In Windows' language settings, add the **United States-International** keyboard (built into Windows, no admin rights needed), switch to it, and run `pkl.exe`.
+
+Why United States-International: PKL needs a Windows layout where right Alt is a real AltGr, and plain US doesn't have one. US-International has the same letters as US. Its dead keys (' " ` ~ ^) are handled by PKL, so they type normally while PKL runs, and act as dead keys again when it's paused. If you can only use plain US, regenerate the layout with `python tools/klc2pkl.py --fake-altgr` and empty `systemsDeadkeys` in `pkl.ini`. PKL then emulates AltGr itself, but the key can occasionally get stuck down; press right Alt again to release it.
 
 Hold left Alt and press right Alt to pause or resume it. If a program shows the wrong characters, press Win+F12 to try another way of sending them. PKL is no longer maintained, and it can't type into programs running as administrator unless it runs as administrator too.
 

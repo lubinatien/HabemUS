@@ -1,6 +1,9 @@
 """Convert an MSKLC .klc file into a Portable Keyboard Layout (PKL) layout.ini.
 
-Usage: python tools/klc2pkl.py [HabemUS.klc] [pkl/layouts/habemus/layout.ini]
+Usage: python tools/klc2pkl.py [--fake-altgr] [HabemUS.klc] [pkl/layouts/habemus/layout.ini]
+
+--fake-altgr makes PKL emulate AltGr on the right Alt key, for running over
+a Windows layout without AltGr (plain US). It can get stuck, see below.
 
 PKL reads layout.ini through the ANSI Win32 INI API, so the output is UTF-8
 without a BOM. Each [layout] row and each [deadkeyN] entry must end with a
@@ -90,7 +93,7 @@ def parse_klc(path):
     return info, states, rows, deadkeys
 
 
-def build_ini(klc_path, info, states, rows, deadkeys):
+def build_ini(klc_path, info, states, rows, deadkeys, fake_altgr=False):
     dk_index = {c: i + 1 for i, c in enumerate(deadkeys)}
     kept = [i for i, s in enumerate(states) if s not in SKIPPED_STATES]
     col_names = {"0": "0Norm", "1": "1Sh", "2": "2Ctrl", "6": "6AGr", "7": "7AGrSh"}
@@ -129,11 +132,13 @@ def build_ini(klc_path, info, states, rows, deadkeys):
     for sc, vk, cap, values, _ in rows:
         cols = [pkl_value(values[i], dk_index) for i in kept]
         out.append("SC0%s = %s\t%s\t%s\t; %s" % (sc.lower(), vk, cap, "\t".join(cols), describe(cols, deadkeys)))
-    # On layouts without AltGr (like plain US), the right Alt key is a plain Alt
-    # and programs take the characters PKL sends while it is held as Alt
-    # shortcuts. As a modifier, PKL holds Ctrl+Alt instead, which Windows
-    # treats as AltGr.
-    if "6" in [states[i] for i in kept]:
+    # On Windows layouts without AltGr (like plain US), the right Alt key is a
+    # plain Alt and programs take the characters PKL sends while it is held as
+    # Alt shortcuts. As a modifier, PKL holds Ctrl+Alt instead, which Windows
+    # treats as AltGr. PKL can miss the key release and leave Ctrl+Alt stuck,
+    # so this is opt-in: running PKL over a layout with a real AltGr
+    # (United States-International) is more reliable.
+    if fake_altgr:
         out.append("RAlt = RAlt\tModifier\t; right Alt works as AltGr")
 
     for dead, pairs in deadkeys.items():
@@ -151,11 +156,13 @@ def build_ini(klc_path, info, states, rows, deadkeys):
 
 def main():
     root = Path(__file__).resolve().parent.parent
-    klc = Path(sys.argv[1]) if len(sys.argv) > 1 else root / "HabemUS.klc"
-    dest = Path(sys.argv[2]) if len(sys.argv) > 2 else root / "pkl" / "layouts" / "habemus" / "layout.ini"
+    args = [a for a in sys.argv[1:] if a != "--fake-altgr"]
+    fake_altgr = "--fake-altgr" in sys.argv[1:]
+    klc = Path(args[0]) if len(args) > 0 else root / "HabemUS.klc"
+    dest = Path(args[1]) if len(args) > 1 else root / "pkl" / "layouts" / "habemus" / "layout.ini"
     info, states, rows, deadkeys = parse_klc(klc)
     dest.parent.mkdir(parents=True, exist_ok=True)
-    dest.write_bytes(build_ini(klc, info, states, rows, deadkeys).encode("utf-8"))
+    dest.write_bytes(build_ini(klc, info, states, rows, deadkeys, fake_altgr).encode("utf-8"))
     print("Wrote %s (%d keys, %d dead keys)" % (dest, len(rows), len(deadkeys)))
 
 
