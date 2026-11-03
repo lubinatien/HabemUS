@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+
+# Local tool settings
+.serena/
+
+# Microsoft Keyboard Layout Creator build output (Project > Build DLL and Setup Package)
+amd64/
+i386/
+ia64/
+wow64/
+arm64/
+*.msi
+setup.exe
