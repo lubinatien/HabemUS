@@ -129,6 +129,12 @@ def build_ini(klc_path, info, states, rows, deadkeys):
     for sc, vk, cap, values, _ in rows:
         cols = [pkl_value(values[i], dk_index) for i in kept]
         out.append("SC0%s = %s\t%s\t%s\t; %s" % (sc.lower(), vk, cap, "\t".join(cols), describe(cols, deadkeys)))
+    # On layouts without AltGr (like plain US), the right Alt key is a plain Alt
+    # and programs take the characters PKL sends while it is held as Alt
+    # shortcuts. As a modifier, PKL holds Ctrl+Alt instead, which Windows
+    # treats as AltGr.
+    if "6" in [states[i] for i in kept]:
+        out.append("RAlt = RAlt\tModifier\t; right Alt works as AltGr")
 
     for dead, pairs in deadkeys.items():
         out += ["", "", "[deadkey%d]" % dk_index[dead]]
