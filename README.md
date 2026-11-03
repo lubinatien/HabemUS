@@ -33,7 +33,7 @@ Dead keys are in **bold**: press one, then a letter (see [Dead keys](#dead-keys)
 
 | Key | AltGr | Shift+AltGr | | Key | AltGr | Shift+AltGr |
 |---|---|---|---|---|---|---|
-| `` ` `` | **`** | **~** | | `A` | à | À |
+| `` ` `` | **&#96;** | **~** | | `A` | à | À |
 | `1` | ¡ | ¹ | | `S` | ä | Ä |
 | `2` | ª | ² | | `D` | è | È |
 | `3` | º | ³ | | `F` | ë | Ë |
@@ -72,8 +72,8 @@ Press the dead key, release it, then type a letter. Pressing it twice, or follow
 | **^** circumflex | Shift+AltGr+6 | â ê î ô û ŵ ŷ |
 | **´** acute | AltGr+' | á é í ó ú ý ć ń ś ź ŕ ł, and ő ű after ö ü (AltGr+; / AltGr+G) |
 | **¨** diaeresis | Shift+AltGr+' | ä ë ï ö ü ÿ ẅ ẍ ḧ ẗ |
-| **`** grave | AltGr+` | à è ì ò ù, and ą ę į ǫ ų after ä ë ï ö ü (ogonek) |
-| **~** tilde | Shift+AltGr+` | ã ñ õ |
+| **&#96;** grave | AltGr+&#96; | à è ì ò ù, and ą ę į ǫ ų after ä ë ï ö ü (ogonek) |
+| **~** tilde | Shift+AltGr+&#96; | ã ñ õ |
 | **ˇ** caron | AltGr+6 | š č ž ř ě ň ď ť ľ ǎ ǐ ǒ ǔ ǧ ǩ ȟ ǰ ǯ ǚ |
 | **˚** ring / dot above | AltGr+7 | å ů ż ċ ġ ė, and ı İ (Turkish dotless / dotted i) |
 | **¬** symbols | AltGr+\ | see below |
@@ -85,7 +85,7 @@ In the pictures below, the dead key is outlined in red, each key shows what it g
 
 ### Symbols (AltGr+\ then…)
 
-![Symbols dead key: what each key gives after AltGr+\](docs/dead-symbols.svg)
+![Symbols dead key: what each key gives after AltGr and backslash](docs/dead-symbols.svg)
 
 <details>
 <summary>Symbols as a table</summary>
@@ -140,10 +140,10 @@ Shift gives the capitals (Shift+C gives Σ). The same dead key also makes **supe
 **¨ diaeresis** (Shift+AltGr+')
 ![Diaeresis dead key](docs/dead-diaeresis.svg)
 
-**` grave** (AltGr+`)
+**&#96; grave** (AltGr+&#96;)
 ![Grave dead key](docs/dead-grave.svg)
 
-**~ tilde** (Shift+AltGr+`)
+**&#126; tilde** (Shift+AltGr+&#96;)
 ![Tilde dead key](docs/dead-tilde.svg)
 
 **ˇ caron** (AltGr+6)
@@ -152,7 +152,7 @@ Shift gives the capitals (Shift+C gives Σ). The same dead key also makes **supe
 **˚ ring / dot above** (AltGr+7)
 ![Ring and dot above dead key](docs/dead-ring.svg)
 
-These pictures only show keys typed without AltGr. The combinations that start from an AltGr letter (´ then ö → ő, ` then ä → ą…) are listed in the table above.
+These pictures only show keys typed without AltGr. The combinations that start from an AltGr letter (´ then ö → ő, &#96; then ä → ą…) are listed in the table above.
 
 </details>
 
@@ -174,7 +174,7 @@ The repository holds the source, [`HabemUS.klc`](HabemUS.klc), not a prebuilt in
 2. Copy the contents of this repository's [`pkl/`](pkl/) folder into the same folder (`pkl.ini` and `layouts\habemus\`).
 3. In Windows' language settings, add the **United States-International** keyboard (built into Windows, no admin rights needed), switch to it, and run `pkl.exe`.
 
-Why United States-International: PKL needs a Windows layout where right Alt is a real AltGr, and plain US doesn't have one. US-International has the same letters as US. Its dead keys (' " ` ~ ^) are handled by PKL, so they type normally while PKL runs, and act as dead keys again when it's paused. If you can only use plain US, regenerate the layout with `python tools/klc2pkl.py --fake-altgr` and empty `systemsDeadkeys` in `pkl.ini`. PKL then emulates AltGr itself, but the key can occasionally get stuck down; press right Alt again to release it.
+Why United States-International: PKL needs a Windows layout where right Alt is a real AltGr, and plain US doesn't have one. US-International has the same letters as US. Its dead keys (`'` `"` `` ` `` `~` `^`) are handled by PKL, so they type normally while PKL runs, and act as dead keys again when it's paused. If you can only use plain US, regenerate the layout with `python tools/klc2pkl.py --fake-altgr` and empty `systemsDeadkeys` in `pkl.ini`. PKL then emulates AltGr itself, but the key can occasionally get stuck down; press right Alt again to release it.
 
 Hold left Alt and press right Alt to pause or resume it. If a program shows the wrong characters, press Win+F12 to try another way of sending them. PKL is no longer maintained, and it can't type into programs running as administrator unless it runs as administrator too.
 
