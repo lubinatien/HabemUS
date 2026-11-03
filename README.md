@@ -174,7 +174,7 @@ The repository holds the source, [`HabemUS.klc`](HabemUS.klc), not a prebuilt in
 2. Copy the contents of this repository's [`pkl/`](pkl/) folder into the same folder (`pkl.ini` and `layouts\habemus\`).
 3. Set Windows to the plain **English (United States)** layout and run `pkl.exe`.
 
-Press both Alt keys together to pause or resume it. If a program shows the wrong characters, press Win+F12 to try another way of sending them. PKL is no longer maintained, and it can't type into programs running as administrator unless it runs as administrator too.
+Hold left Alt and press right Alt to pause or resume it. If a program shows the wrong characters, press Win+F12 to try another way of sending them. PKL is no longer maintained, and it can't type into programs running as administrator unless it runs as administrator too.
 
 ### Changing the layout
 
