@@ -191,7 +191,21 @@ The pictures in [`docs/`](docs/) are SVG files drawn from the `.klc`, in the sty
 
 ## Credits
 
-HabemUS started from **[EurKEY](https://eurkey.steffen.bruentjen.eu/)** by Steffen Brüntjen, version 1.3. From EurKEY it keeps:
+HabemUS draws on two layouts: its design comes from qwerty-fr, and most of its characters from EurKEY.
+
+### qwerty-fr
+
+**[qwerty-fr](https://github.com/qwerty-fr/qwerty-fr)** by Paul (devnoname120) and Julien Blitte is a QWERTY layout for typing French and English. HabemUS takes from it:
+
+- the core idea of placing each accent by its **position relative to its letter**. qwerty-fr puts the grave accent on the letter, the circumflex above, the diaeresis below and the acute to the left. HabemUS groups each vowel into a 2×2 block instead, with the acute on the letter, so that Spanish á é í ó ú are as direct as French à é
+- the goal of being a strict superset of QWERTY: without AltGr, nothing changes
+- accented capitals with Shift + AltGr and Caps Lock (É, Ç…), which AZERTY can't type
+- the no-break space and narrow no-break space on AltGr+Space, for French typography. HabemUS puts the narrow one, the more common in French, without Shift
+- a Greek dead key that follows the Linux standard, which qwerty-fr also uses
+
+### EurKEY
+
+HabemUS started from the character set of **[EurKEY](https://eurkey.steffen.bruentjen.eu/)** by Steffen Brüntjen, version 1.3. From EurKEY it keeps:
 
 - the AltGr number row, quotation marks and punctuation: ¡ ª º £ €, ¹ ² ³ ¥ ¢, „ “ ” ‚ ‘ ’, « » ‹ ›, × ÷, ¿ …
 - the contents of the circumflex, acute, diaeresis, grave and tilde dead keys
@@ -199,11 +213,11 @@ HabemUS started from **[EurKEY](https://eurkey.steffen.bruentjen.eu/)** by Steff
 - the idea of a symbol dead key on AltGr+\, with its arrows and fractions
 - the superscripts, subscripts and Space → μ of the Greek dead key
 
-HabemUS changes:
+Compared with EurKEY, HabemUS changes:
 
 - the AltGr letter keys, rearranged into the "accents around the letter" blocks above. EurKEY favours Germanic and Nordic letters, while HabemUS favours French and Spanish
-- ă ș ț for Romanian, ő ű for Hungarian, and the two no-break spaces
-- the Greek letters, which follow the Linux standard (`dead_greek` in [libX11's Compose table](https://gitlab.freedesktop.org/xorg/lib/libx11/-/raw/master/nls/en_US.UTF-8/Compose.pre)) instead of EurKEY's Windows mapping, plus ς
+- ă ș ț for Romanian, ő ű for Hungarian, and the two no-break spaces (from qwerty-fr)
+- the Greek letters, which follow the Linux standard (`dead_greek` in [libX11's Compose table](https://gitlab.freedesktop.org/xorg/lib/libx11/-/raw/master/nls/en_US.UTF-8/Compose.pre)), like qwerty-fr, instead of EurKEY's Windows mapping, plus ς
 - the symbol dead key contents, which add dashes, ©, ®, ™ and the other symbols listed above
 
 The portable version runs on [Portable Keyboard Layout](https://github.com/Portable-Keyboard-Layout/Portable-Keyboard-Layout) by Máté Farkas.
